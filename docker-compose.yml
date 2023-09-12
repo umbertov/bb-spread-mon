@@ -20,10 +20,13 @@ services:
   grafana:
     image: grafana/grafana
     container_name: grafana
+    user: "${UID}:${GID}"
     ports:
       - "3000:3000"
     depends_on:
       - influxdb
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=your_admin_password
+    volumes:
+      - ./grafana:/var/lib/grafana
 
